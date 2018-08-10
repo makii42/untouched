@@ -1,0 +1,13 @@
+# What is this file? Check it out at https://github.com/makii42/gottaw !
+excludes:
+- .git
+- .hg
+- .vscode
+- .idea
+- '*-go-tmp-umask'
+- vendor
+- untouched
+pipeline:
+- go build -v .
+- go test -v ./...
+server: ./untouched

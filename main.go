@@ -9,6 +9,23 @@ import (
 
 const (
 	commandGit = "git"
+	gitUnknown = "??"
+	gitIgnored = "!!"
+	gitDeleted = "D "
+	gitAdded1  = "A "
+	gitAdded2  = "AM"
+	gitAdded3  = "AD"
+)
+
+var (
+	ignoredStatus = map[string]bool{
+		gitUnknown: true,
+		gitIgnored: true,
+		gitDeleted: true,
+		gitAdded1:  true,
+		gitAdded2:  true,
+		gitAdded3:  true,
+	}
 )
 
 type (
@@ -36,7 +53,9 @@ func main() {
 			op:   line[:2],
 			file: line[3:],
 		}
-		mods = append(mods, &mod)
+		if _, ignore := ignoredStatus[mod.op]; !ignore {
+			mods = append(mods, &mod)
+		}
 	}
 	if len(mods) > 0 {
 		log.Fatalf("found %d modifications", len(mods))
