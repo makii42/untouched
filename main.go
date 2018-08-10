@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"fmt"
 	"log"
+	"os"
 	"os/exec"
 )
 
@@ -60,6 +62,10 @@ func main() {
 		}
 	}
 	if len(mods) > 0 {
-		log.Fatalf("found %d modifications", len(mods))
+		fmt.Fprintf(os.Stderr, "found %d modifications\n", len(mods))
+		for _, mod := range mods {
+			fmt.Fprintf(os.Stderr, "%s %s\n", mod.op, mod.file)
+		}
+		os.Exit(23)
 	}
 }
