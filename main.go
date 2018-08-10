@@ -18,6 +18,8 @@ const (
 )
 
 var (
+	version       = "dev"
+	revision      = "dev"
 	ignoredStatus = map[string]bool{
 		gitUnknown: true,
 		gitIgnored: true,
