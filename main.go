@@ -11,6 +11,7 @@ import (
 
 const (
 	commandGit = "git"
+	rcError    = 23
 	gitUnknown = "??"
 	gitIgnored = "!!"
 	gitDeleted = "D "
@@ -49,7 +50,6 @@ func main() {
 		log.Fatalf("Could not obtain output: %s", err)
 	}
 	scanner := bufio.NewScanner(bytes.NewReader(out))
-
 	mods := []*modification{}
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -66,6 +66,6 @@ func main() {
 		for _, mod := range mods {
 			fmt.Fprintf(os.Stderr, "%s %s\n", mod.op, mod.file)
 		}
-		os.Exit(23)
+		os.Exit(rcError)
 	}
 }
