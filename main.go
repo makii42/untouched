@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -21,8 +22,9 @@ const (
 )
 
 var (
-	version       = "dev"
-	revision      = "dev"
+	version  = "dev"
+	revision = "dev"
+
 	ignoredStatus = map[string]bool{
 		gitUnknown: true,
 		gitIgnored: true,
@@ -31,6 +33,8 @@ var (
 		gitAdded2:  true,
 		gitAdded3:  true,
 	}
+
+	doDiff bool
 )
 
 type (
@@ -66,6 +70,21 @@ func main() {
 		for _, mod := range mods {
 			fmt.Fprintf(os.Stderr, "%s %s\n", mod.op, mod.file)
 		}
+		if doDiff {
+			cmd = exec.Command(location, "diff")
+			cmd.Stdin = os.Stdin
+			cmd.Stdout = os.Stdout
+			cmd.Stderr = os.Stderr
+			err := cmd.Run()
+			if err != nil {
+				log.Fatalf("Could not run '%s diff': %s", location, err)
+			}
+		}
 		os.Exit(rcError)
 	}
+}
+
+func init() {
+	flag.BoolVar(&doDiff, "diff", false, "Execute 'go diff' if touched files are found.")
+	flag.Parse()
 }
