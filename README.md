@@ -8,7 +8,7 @@ WHY
 ---
 
 This might come in handy if you check in your generated code from `protoc`,
-`swagger` and the like, and you want to make sure the generated code in your
+`openapi` and the like, and you want to make sure the generated code in your
 repo did not get changed during your CI build.
 
 What exactly
