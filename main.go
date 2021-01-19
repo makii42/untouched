@@ -85,6 +85,6 @@ func main() {
 }
 
 func init() {
-	flag.BoolVar(&doDiff, "diff", false, "Execute 'go diff' if touched files are found.")
+	flag.BoolVar(&doDiff, "diff", false, "Execute 'git diff' if touched files are found.")
 	flag.Parse()
 }
