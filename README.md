@@ -1,7 +1,7 @@
 untouched
 =========
 
-Stupid simple tool to run in a CI pipeline to or similar to detect changed
+Stupid simple tool to run in a CI pipeline or similar to detect changed
 files from code generators.
 
 WHY
@@ -15,8 +15,12 @@ What exactly
 ------------
 
 `untouched` executes a git command and exits with a non-zero return code if it
-finds files in the working tree were modified. As of now, it does not take any
-flags. It will ignore a few [git status indicators][untouched-ignores].
+finds files in the working tree were modified.  It will ignore a few [git 
+status indicators][untouched-ignores].
+
+As of now, it takes one flag `-diff`, which triggers an additional `git diff`
+once it discoveres files that were touched, so it's obvious in your pipeline's
+output what changes were made.
 
 What's next
 -----------
@@ -31,4 +35,4 @@ useful can think of a number of flags to be added like:
 
 PRs welcome.
 
-[untouched-ignores]: main.go#L15-20
+[untouched-ignores]: main.go#L15-21
