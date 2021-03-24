@@ -43,11 +43,6 @@ jobs:
          -osarch="linux/386 linux/amd64 linux/arm windows/386 windows/adm64" \
          -ldflags="-X main.version=build-$GITHUB_RUN_NUMBER -X main.revision=$GITHUB_SHA"
 
-  dist:
-    name: Distribution build
-    runs-on: ubuntu-latest
-    steps:
-
     - name: Docker Build
       run: |
         docker build -t makii42/untouched:latest .
