@@ -20,5 +20,11 @@ steps:
   - env
   - | 
     gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
-        -osarch="linux/386 linux/amd64 linux/arm windows/386 windows/adm64" \
+        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
         -ldflags="-X main.version=build-${DRONE_BUILD_NUMBER} -X main.revision=${DRONE_COMMIT_SHA}"
+
+- name: docker
+  image: plugins/docker
+  settings:
+    repo: makii42/untouched
+    dry_run: true
