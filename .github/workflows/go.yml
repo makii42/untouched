@@ -46,3 +46,9 @@ jobs:
     - name: Docker Build
       run: |
         docker build -t makii42/untouched:latest .
+
+
+    - name: Test Docker Container
+      run: |
+        docker run --rm makii42/untouched:latest untouched -h
+        docker run --rm makii42/untouched:latest untouched 
