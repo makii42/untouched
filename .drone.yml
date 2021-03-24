@@ -52,7 +52,7 @@ steps:
     auto_tag: true
     auto_tag_suffix: linux-amd64
     dockerfile: Dockerfile.amd64
-    repo: drone/drone
+    repo: makii42/untouched
     username:
       from_secret: DOCKER_USER
     password:
@@ -88,7 +88,7 @@ steps:
     auto_tag: true
     auto_tag_suffix: linux-arm64
     dockerfile: Dockerfile.arm64
-    repo: drone/drone
+    repo: makii42/untouched
     username:
       from_secret: DOCKER_USER
     password:
@@ -126,7 +126,7 @@ steps:
     auto_tag: true
     auto_tag_suffix: linux-arm
     dockerfile: Dockerfile.arm
-    repo: drone/drone
+    repo: makii42/untouched
     username:
       from_secret: DOCKER_USER
     password:
