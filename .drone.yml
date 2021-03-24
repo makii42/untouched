@@ -120,17 +120,18 @@ steps:
     GOARCH: arm
     GOOS: linux
 
-- name: publish
-  image: plugins/docker:18
-  settings:
-    auto_tag: true
-    auto_tag_suffix: linux-arm
-    dockerfile: Dockerfile.arm32v7
-    repo: makii42/untouched
-    username:
-      from_secret: DOCKER_USER
-    password:
-      from_secret: DOCKER_PASSWORD
+# fails currentl :(
+#- name: publish
+#  image: plugins/docker:18
+#  settings:
+#    auto_tag: true
+#    auto_tag_suffix: linux-arm
+#    dockerfile: Dockerfile.arm32v7
+#    repo: makii42/untouched
+#    username:
+#      from_secret: DOCKER_USER
+#    password:
+#      from_secret: DOCKER_PASSWORD
 
 trigger:
   event:
