@@ -151,7 +151,7 @@ steps:
   settings:
     auto_tag: true
     ignore_missing: true
-    spec: manifest.server.tmpl
+    spec: manifest.tmpl
     username:
       from_secret: DOCKER_USER
     password:
