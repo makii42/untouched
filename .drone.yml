@@ -49,13 +49,11 @@ steps:
   environment:
     GITHUB_TOKEN:
       from_secret: GITHUB_TOKEN
-    GITHUB_USER:
-      from_secret: GITHUB_USER
   when:
     event:
     - tag
   commands:
-  - ghr -owner ${GITHUB_USER} -replace ${DRONE_TAG} ./dist/
+  - ghr -owner ${DRONE_REPO_NAMESPACE} -replace ${DRONE_TAG} ./dist/
 
 ---
 
