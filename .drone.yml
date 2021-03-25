@@ -27,7 +27,7 @@ steps:
   - go get github.com/mitchellh/gox
   - | 
     gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
-        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
+        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/amd64" \
         -ldflags="-X main.version=build-${DRONE_BUILD_NUMBER} -X main.revision=${DRONE_COMMIT_SHA}"
 
 
@@ -40,7 +40,7 @@ steps:
   - go get github.com/mitchellh/gox
   - | 
     gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
-        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
+        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/amd64" \
         -ldflags="-X main.version=${DRONE_TAG##v} -X main.revision=${DRONE_COMMIT_SHA}"
 
 
