@@ -1,4 +1,5 @@
 ---
+
 kind: pipeline
 type: docker
 name: ci
@@ -8,20 +9,52 @@ platform:
   arch: amd64
 
 steps:
+
 - name: build-and-test
   image: golang:1.16
   commands:
   - go test ./...
   - go build -v .
 
-- name: dist
+
+- name: build-dist
   image: golang:1.16
+  when:
+    event:
+    - push
+    - pull_request
   commands:
   - go get github.com/mitchellh/gox
   - | 
     gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
         -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
         -ldflags="-X main.version=build-${DRONE_BUILD_NUMBER} -X main.revision=${DRONE_COMMIT_SHA}"
+
+
+- name: build-dist-release
+  image: golang:1.16
+  when:
+    event:
+    - tag
+  commands:
+  - go get github.com/mitchellh/gox
+  - | 
+    gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
+        -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
+        -ldflags="-X main.version=build-${DRONE_TAG##v} -X main.revision=${DRONE_COMMIT_SHA}"
+
+
+- name: upload-dist
+  image: tsub/ghr
+  environment:
+    GITHUB_TOKEN:
+      from_secret: GITHUB_TOKEN
+  when:
+    event:
+    - tag
+  commands:
+  - ghr -replace ${DRONE_TAG} ./dist/
+
 ---
 
 kind: pipeline
@@ -61,6 +94,7 @@ steps:
     event:
     - push
     - tag
+
 depends_on:
 - ci
 
