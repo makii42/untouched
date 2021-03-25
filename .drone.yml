@@ -41,7 +41,7 @@ steps:
   - | 
     gox -output="dist/{{.Dir}}_{{.OS}}_{{.Arch}}" \
         -osarch="linux/386 linux/amd64 linux/arm linux/arm64 windows/386 windows/adm64" \
-        -ldflags="-X main.version=build-${DRONE_TAG##v} -X main.revision=${DRONE_COMMIT_SHA}"
+        -ldflags="-X main.version=${DRONE_TAG##v} -X main.revision=${DRONE_COMMIT_SHA}"
 
 
 - name: upload-dist
