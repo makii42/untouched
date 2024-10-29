@@ -33,6 +33,6 @@ useful can think of a number of flags to be added like:
 * Adjust the git status indicators ignored
 * ... you get the whiff.
 
-PRs welcome.
+PRs are welcome.
 
 [untouched-ignores]: main.go#L15-21
